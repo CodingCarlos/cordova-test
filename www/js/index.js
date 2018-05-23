@@ -28,6 +28,12 @@ var app = {
     // 'pause', 'resume', etc.
     onDeviceReady: function() {
         this.receivedEvent('deviceready');
+        
+        var cameraOptions = {
+            quality: 100
+        };
+        
+        navigator.camera.getPicture(cameraSuccess, cameraError, cameraOptions);
     },
 
     // Update DOM on a Received Event
@@ -44,3 +50,13 @@ var app = {
 };
 
 app.initialize();
+
+    
+function cameraSuccess(imageData) {
+  var image = document.getElementById('myImage');
+  image.src = "data:image/jpeg;base64," + imageData;
+}
+
+function cameraError(err) {
+  console.error('error!', err);
+}
